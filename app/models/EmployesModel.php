@@ -8,7 +8,6 @@ class EmployesModel extends AppModel
 {
     public function getEmployers(int $idDepartment, int $countOnPage, int $page): array
     {
-        /** Ініціалізація результуючого массиву*/
         $department = '';
         if ($idDepartment !== 0) {
             $department = 'WHERE `departments`.`id`=:idDepartment';
@@ -54,7 +53,7 @@ class EmployesModel extends AppModel
     }
     public function getCount(int $idDepartment): int
     {
-        /** Ініціалізація результуючого массиву*/
+
         $department = '';
         if ($idDepartment !== 0) {
             $department = 'LEFT JOIN `departments_emploers` ON `departments_emploers`.`emploer_id` = `emploers`.`id`
@@ -77,7 +76,7 @@ class EmployesModel extends AppModel
 //        print_r($select);
 //        print_r($result->errorInfo());
 //        die;
-        /** Повераємо результуючий массив*/
+
         return $data;
     }
 
@@ -89,7 +88,7 @@ class EmployesModel extends AppModel
         $statement = $this->db_connect->prepare($select);
         /** Виконуємо запит*/
         $statement->execute(['id' => $department]);
-        /** Повертаємо результуючий массив*/
+
         return $statement->fetch(PDO::FETCH_COLUMN);
     }
     public function getAllDepartments()
@@ -100,7 +99,7 @@ class EmployesModel extends AppModel
         $statement = $this->db_connect->prepare($select);
         /** Виконуємо запит*/
         $statement->execute();
-        /** Повертаємо результуючий массив*/
+
         return $statement->fetchAll(PDO::FETCH_UNIQUE);
     }
 

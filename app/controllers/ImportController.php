@@ -15,7 +15,7 @@ class ImportController extends AppController
 
     public function indexAction()
     {
-$this->generateXmlAction();
+//        $this->generateXmlAction();
     }
     public function generateXmlAction()
     {

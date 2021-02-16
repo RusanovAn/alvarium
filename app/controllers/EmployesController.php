@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Клас ReportController описує методи роботи зі сторінкою звітів
+ * Клас EmployesController описує методи роботи зі сторінкою звітів
 */
 
 namespace app\controllers;
