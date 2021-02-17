@@ -43,23 +43,30 @@ class Router
         if (!empty($url_array[0])) {
             /** Controller повинен починатися з великої букви всі інші з маленької*/
             $rout['Controller'] = ucfirst(strtolower($url_array[0]));
+
         } else {
             /**Якщо контроллер не вказано, це вказує на головну сторінку
              * за замовчуванням головною сторінкою є звіт
              */
             $rout['Controller'] = 'Employes';
         }
+
         /**
          * Controller повинен в кінці мати приставку Controller
          * задаємо путь де знаходяться всі контроллери
          */
         $controller = 'app\controllers\\' . $rout['Controller'] . 'Controller';
-        $action = 'indexAction';
-
         $rout['action'] = 'index';
+        $action = $rout['action'] . 'Action';
         if (isset($url_array[1]) && !empty($url_array[1])) {
             /**записуємо в массив з маршрутом відформатований action*/
             $rout['department'] = $url_array[1];
+            $action = $url_array[1] . 'Action';
+        }
+        $matchRouts = require_once ROOT . '/configs/routs.php';
+        if (in_array($rout['Controller'], array_keys($matchRouts))) {
+            $rout['action'] = $matchRouts[$rout['Controller']];
+            $action = $rout['action'] . 'Action';
         }
         /**Отриманний массив маршруту записуємо в константу*/
         define('ROUT', $rout);

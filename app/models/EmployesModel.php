@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+
 use PDO;
 
 class EmployesModel extends AppModel
@@ -90,17 +91,6 @@ class EmployesModel extends AppModel
         $statement->execute(['id' => $department]);
 
         return $statement->fetch(PDO::FETCH_COLUMN);
-    }
-    public function getAllDepartments()
-    {
-        /** Формуємо запит*/
-        $select = "SELECT `departments`.`id` AS `id`, `departments`.`title` AS `title` FROM `departments`";
-        /** Підготовлюємо запит*/
-        $statement = $this->db_connect->prepare($select);
-        /** Виконуємо запит*/
-        $statement->execute();
-
-        return $statement->fetchAll(PDO::FETCH_UNIQUE);
     }
 
 }

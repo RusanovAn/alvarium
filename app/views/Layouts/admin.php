@@ -66,6 +66,7 @@
 <!-- user hundler  -->
 <script src="plugins/jquery-validation/jquery.validate.min.js"></script>
 <!-- Page specific script -->
+<script src="/js/main.js"></script>
 </body>
 </html>
 
