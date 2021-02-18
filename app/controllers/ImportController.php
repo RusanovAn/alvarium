@@ -91,6 +91,10 @@ class ImportController extends AppController
     }
     public function xmlToSqlAction()
     {
+        if (!file_exists(ROOT.'/files/employees.xml')) {
+            echo 'Файл импорта отсутствует';
+            exit();
+        }
         $xml = simplexml_load_file(ROOT.'/files/employees.xml');
         $this->employersToDb($xml->Employers->employer);
         $this->departmentsToDb($xml->Departments->Department);

@@ -72,11 +72,21 @@ class Router
         define('ROUT', $rout);
 
         /**Створюємо єкземпляр контроллеру*/
-        $controller_obj = new $controller($rout);
-        /**Викликаємо його action який підготує данні та віддасть сторінці*/
-        $controller_obj->$action();
+        if (class_exists($controller)) {
+            $controller_obj = new $controller($rout);
+            if (method_exists($controller_obj, $action)) {
+                /**Викликаємо його action який підготує данні та віддасть сторінці*/
+                $controller_obj->$action();
+            } else {
+                header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found", true, 404);
+                include(ROOT . "/public/404.php");
+
+            }
+        } else {
+            header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found", true, 404);
+            include(ROOT . "/public/404.php");
+        }
         /**Формуємо сторінку для показу користувачу*/
         $controller_obj->getView();
     }
-
 }
